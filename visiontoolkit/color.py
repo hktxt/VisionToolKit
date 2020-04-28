@@ -1,5 +1,6 @@
+# https://github.com/wkentaro/imgviz/blob/master/imgviz/color.py
 import numpy as np
-import cv2
+import PIL.Image
 
 
 def rgb2gray(rgb):
@@ -140,3 +141,11 @@ def asgray(img):
             "shape={}, dtype={}".format(img.shape, img.dtype)
         )
     return gray
+
+
+def get_fg_color(color):
+    color = np.asarray(color, dtype=np.uint8)
+    intensity = rgb2gray(color.reshape(1, 1, 3)).sum()
+    if intensity > 170:
+        return (0, 0, 0)
+    return (255, 255, 255)
