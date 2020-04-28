@@ -1,4 +1,5 @@
 import cv2
+import json
 import matplotlib.pyplot as plt
 
 
@@ -31,3 +32,9 @@ def imshow(image, title=None, axis='on'):
         plt.xticks([])
         plt.yticks([])
     plt.show()
+
+
+def readJson(pth):
+    f = open(pth, encoding='utf-8')
+    file = json.load(f)
+    return file
