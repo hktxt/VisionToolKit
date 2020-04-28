@@ -4,6 +4,7 @@ VisionToolKit/__init__.py
 VisionToolKit/base.py
 VisionToolKit/color.py
 VisionToolKit/draw.py
+VisionToolKit/utils.py
 VisionToolKit/visualization.py
 VisionToolKit.egg-info/PKG-INFO
 VisionToolKit.egg-info/SOURCES.txt

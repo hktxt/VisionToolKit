@@ -1,6 +1,17 @@
 # https://github.com/wkentaro/imgviz/blob/master/imgviz/color.py
 import numpy as np
 import PIL.Image
+import cv2
+
+
+def bgr2rgb(bgr):
+    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+    return rgb
+
+
+def rgb2bgr(rgb):
+    bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+    return bgr
 
 
 def rgb2gray(rgb):
