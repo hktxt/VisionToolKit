@@ -18,7 +18,9 @@ def imread(img_pth):
 
 def imshow(image, ratio=1, title=None, axis='on'):
     assert ratio >= 0, 'ratio should larger than 1.'
-    image = cv2.resize(image, (image.shape[0]*ratio, image.shape[1]*ratio))
+    size = (image.shape[0]*ratio, image.shape[1]*ratio)
+    print(size)
+    image = cv2.resize(image, size)
     plt.imshow(image)
     if title:
         plt.title(title)
