@@ -26,6 +26,29 @@ def xywh2xyxy(x):
     return y
 
 
+def rle2mask(rle, imgshape):
+    # mask = rle2mask(train['EncodedPixels'].iloc[i], img.shape)
+    width = imgshape[0]
+    height = imgshape[1]
+
+    mask = np.zeros(width * height).astype(np.uint8)
+
+    array = np.asarray([int(x) for x in rle.split()])
+    starts = array[0::2]
+    lengths = array[1::2]
+
+    current_position = 0
+    for index, start in enumerate(starts):
+        mask[int(start):int(start + lengths[index])] = 1
+        current_position += lengths[index]
+
+    return np.flipud(np.rot90(mask.reshape(height, width), k=1))
+
+
+def mask2rle(mask):
+    pass
+
+
 def IOU():
     pass
 
