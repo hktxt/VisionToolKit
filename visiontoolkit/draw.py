@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 
 def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
@@ -54,33 +55,21 @@ def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
     return img
 
 
-def draw_mask(img, masks, class_ids=None, class_idx_to_name=None, color=None, seed=None):
+def draw_mask(img, mask, alpha=0.5):
     """
-    draw masks in the image.
-    Parameters
-    ----------
-    img:  the input image, numpy.ndarray (H, W, C).
-    masks: the masks, (N, H, W), N is the class number.
-    class_ids: class id of every bbox, list of int, e.g. [18, 17].
-    class_idx_to_name: name of class_id, dict: {17: 'cat', 18: 'dog'}
-    color: the color for drawing, tuple, length of N,
-    seed: random seed, if color is not specified seed will be used for generate fixed color.
+        draw masks in the image.
+        Parameters
+        ----------
+        img:  the input image, numpy.ndarray (H, W, C).
+        mask: the masks, (N, H, W), N is the class number.
+        alpha: float, Alpha of RGB (default: 0.5).
 
-    Returns
-    -------
-    Output: image, numpy.ndarray, (H, W, C)
-
-    example:
-    pth = 'C:/Users/Emily/Pictures/000000386298.jpg'
-    bboxes = [[366.7, 80.84, 499.5, 262.68], [5.66, 138.95, 152.75, 303.83]]  # x1y1x2y2
-    class_id = [18, 17]
-    class_id_to_name = {17: 'cat', 18: 'dog'}
-    img1 = vtk.imread(pth)
-    drawed = vtk.draw_bbox(img, bboxes, class_id, class_id_to_name)
-    #drawed = vtk.draw_bbox(img, bboxes, class_id)
-    #drawed = vtk.draw_bbox(img, bboxes)
-    vtk.imshow(drawed)
-
-    """
-    assert masks.max() == 1, 'masks should be one-hot encoded, larger than 1 should not be accepted.'
+        Returns
+        -------
+        Output: image, numpy.ndarray, (H, W, C)
+        """
+    assert img.shape == mask.shape, f'shape error. image:{img.shape}, mask:{mask.shape}'
+    masked = (1 - alpha) * img.astype(float) + alpha * mask.astype(float)
+    masked = np.clip(masked.round(), 0, 255).astype(np.uint8)
+    return masked
 
