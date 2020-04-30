@@ -73,3 +73,7 @@ def draw_mask(img, mask, alpha=0.5):
     masked = np.clip(masked.round(), 0, 255).astype(np.uint8)
     return masked
 
+
+def draw_keypoints():
+    pass
+

@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 
 def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
@@ -52,3 +53,23 @@ def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
             cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=colr, thickness=thickness)
 
     return img
+
+
+def draw_mask(img, mask, alpha=0.5):
+    """
+        draw masks in the image.
+        Parameters
+        ----------
+        img:  the input image, numpy.ndarray (H, W, C).
+        mask: the masks, (N, H, W), N is the class number.
+        alpha: float, Alpha of RGB (default: 0.5).
+
+        Returns
+        -------
+        Output: image, numpy.ndarray, (H, W, C)
+        """
+    assert img.shape == mask.shape, f'shape error. image:{img.shape}, mask:{mask.shape}'
+    masked = (1 - alpha) * img.astype(float) + alpha * mask.astype(float)
+    masked = np.clip(masked.round(), 0, 255).astype(np.uint8)
+    return masked
+
