@@ -2,4 +2,4 @@
 A toolkit for computer vision.
 
 ## installlation
-pip install git+https://github.com/hktxt/VisionToolKit
+'pip install git+https://github.com/hktxt/VisionToolKit'
