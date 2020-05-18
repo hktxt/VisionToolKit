@@ -42,9 +42,9 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
             x_min, y_min, x_max, y_max = list(map(int, bbox))
             class_name = class_idx_to_name[class_id] if class_idx_to_name else str(class_id)
             #colr = box_color
-            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=box_color, thickness=thickness)
+            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), box_color, thickness)
             ((text_width, text_height), _) = cv2.getTextSize(class_name, cv2.FONT_HERSHEY_SIMPLEX, 0.35, 1)
-            cv2.rectangle(img, (x_min, y_min - int(1.3 * text_height)), (x_min + text_width, y_min), colr, -1)
+            cv2.rectangle(img, (x_min, y_min - int(1.3 * text_height)), (x_min + text_width, y_min), box_color, -1)
             cv2.putText(img, class_name, (x_min, y_min - int(0.3 * text_height)), cv2.FONT_HERSHEY_SIMPLEX, 0.35,
                         text_color,
                         lineType=cv2.LINE_AA)
@@ -52,7 +52,7 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
         for bbox in bboxes:
             x_min, y_min, x_max, y_max = list(map(int, bbox))
             #colr = box_color
-            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=box_color, thickness=thickness)
+            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), box_color, thickness)
 
     return img
 
