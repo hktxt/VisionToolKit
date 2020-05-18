@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+from copy import deepcopy
 
 
-def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
+def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
               box_color=(255, 0, 0), text_color=(255, 255, 255), thickness=2):
     """
     draw bounding box in the image.
@@ -33,7 +34,7 @@ def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
     vtk.imshow(drawed)
 
     """
-    img = img.copy()
+    img = deepcopy(image)
     if class_ids:
         assert len(bboxes) == len(class_ids), 'length error, len(bboxes) should == len(class_id).'
 
