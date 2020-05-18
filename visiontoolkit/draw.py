@@ -33,6 +33,7 @@ def draw_bbox(img, bboxes, class_ids=None, class_idx_to_name=None,
     vtk.imshow(drawed)
 
     """
+    img = img.copy()
     if class_ids:
         assert len(bboxes) == len(class_ids), 'length error, len(bboxes) should == len(class_id).'
 
