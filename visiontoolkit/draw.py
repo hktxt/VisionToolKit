@@ -54,7 +54,7 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
             colr = box_color
             cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=colr, thickness=thickness)
 
-    return image, img
+    return img
 
 
 def draw_mask(img, mask, alpha=0.5):
