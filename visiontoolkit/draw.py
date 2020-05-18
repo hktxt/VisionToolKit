@@ -53,7 +53,8 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
             x_min, y_min, x_max, y_max = list(map(int, bbox))
             #colr = box_color
             print(x_min, y_min)
-            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), box_color, thickness)
+            print(x_max, y_max)
+            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), 255, thickness)
 
     return img
 
