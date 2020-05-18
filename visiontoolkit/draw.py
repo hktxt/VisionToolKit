@@ -9,7 +9,7 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
     draw bounding box in the image.
     Parameters
     ----------
-    img:  the input image, numpy.ndarray (H, W, C).
+    image:  the input image, numpy.ndarray (H, W, C).
     bboxes: bounding boxes, list: [[x1, y1, x2, y2], ..., [x1, y1, x2, y2]].
            e.g. [[97, 12, 247, 212], [[90, 17, 242, 219]]].
     class_ids: class id of every bbox, list of int, e.g. [18, 17].
@@ -41,8 +41,8 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
         for bbox, class_id in zip(bboxes, class_ids):
             x_min, y_min, x_max, y_max = list(map(int, bbox))
             class_name = class_idx_to_name[class_id] if class_idx_to_name else str(class_id)
-            colr = box_color
-            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=colr, thickness=thickness)
+            #colr = box_color
+            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=box_color, thickness=thickness)
             ((text_width, text_height), _) = cv2.getTextSize(class_name, cv2.FONT_HERSHEY_SIMPLEX, 0.35, 1)
             cv2.rectangle(img, (x_min, y_min - int(1.3 * text_height)), (x_min + text_width, y_min), colr, -1)
             cv2.putText(img, class_name, (x_min, y_min - int(0.3 * text_height)), cv2.FONT_HERSHEY_SIMPLEX, 0.35,
@@ -51,8 +51,8 @@ def draw_bbox(image, bboxes, class_ids=None, class_idx_to_name=None,
     else:
         for bbox in bboxes:
             x_min, y_min, x_max, y_max = list(map(int, bbox))
-            colr = box_color
-            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=colr, thickness=thickness)
+            #colr = box_color
+            cv2.rectangle(img, (x_min, y_min), (x_max, y_max), color=box_color, thickness=thickness)
 
     return img
 
