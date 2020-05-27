@@ -20,8 +20,8 @@ def imread(img_pth, c='rgb'):
     return image
 
 
-def imsave(img, pth):
-    cv2.imwrite(img, pth)
+def imsave(pth, img):
+    cv2.imwrite(pth, img)
 
 
 def imshow(image, title=None, axis='on'):
