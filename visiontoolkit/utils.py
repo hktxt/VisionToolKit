@@ -4,6 +4,25 @@ import io
 import PIL.Image
 
 
+def padd2square(img, value=0):
+    """
+    padd image to square and keep ratio.
+    :param img: numpy.array image, [h,w,c],
+    :param value: padd value,
+    :return: padded image.
+    """
+    h, w, c = img.shape
+    if h >= w:
+        squareImg = np.ones((h, h, c), dtype=img.dtype) * value
+        p = int((h-w)/2)
+        squareImg[:, p:p+w, :] = img
+    else:
+        squareImg = np.ones((w, w, c), dtype=img.dtype) * value
+        p = int((w-h)/2)
+        squareImg[p:p+h, :, :] = img
+    return squareImg
+
+
 # modified form: https://github.com/ultralytics/yolov3/blob/master/utils/utils.py
 def xyxy2xywh(x):
     # Transform box coordinates from [x1, y1, x2, y2] (where xy1=top-left, xy2=bottom-right) to [x, y, w, h]
