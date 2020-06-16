@@ -80,15 +80,16 @@ def draw_mask(img, mask, alpha=0.5):
         draw masks in the image.
         Parameters
         ----------
-        img:  the input image, numpy.ndarray (H, W, C).
-        mask: the masks, (N, H, W), N is the class number.
+        img:  the input image, numpy.ndarray (H, W, C);
+        mask: the masks, (N, H, W), N is the class number, or (H, W) for single class;
         alpha: float, Alpha of RGB (default: 0.5).
 
         Returns
         -------
         Output: image, numpy.ndarray, (H, W, C)
         """
-    assert img.shape == mask.shape, f'shape error. image:{img.shape}, mask:{mask.shape}'
+    if mask.ndim != 2:
+        mask = sum(mask)
     masked = (1 - alpha) * img.astype(float) + alpha * mask.astype(float)
     masked = np.clip(masked.round(), 0, 255).astype(np.uint8)
     return masked
