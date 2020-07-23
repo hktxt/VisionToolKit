@@ -38,3 +38,7 @@ def readJson(pth):
     f = open(pth, encoding='utf-8')
     file = json.load(f)
     return file
+
+
+if __name__ == "__main__":
+    pass

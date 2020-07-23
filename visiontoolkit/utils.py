@@ -2,6 +2,7 @@ import numpy as np
 import base64
 import io
 import PIL.Image
+from visiontoolkit.base import readJson
 
 
 def padd2square(img, value=0):
@@ -87,3 +88,26 @@ def img_b64_to_arr(img_b64):
     img_data = base64.b64decode(img_b64)
     img_arr = img_data_to_arr(img_data)
     return img_arr
+
+
+def labelme_decoder(json_pth):
+    """
+
+    :param json_pth: the annotation json file path of labelme format;
+    :return: image array, bbox, mask.
+    """
+    data = readJson(json_pth)
+    imageData = data.get('imageData')
+    img = img_b64_to_arr(imageData)
+    shapes = data['shapes']
+    annos = {}
+    for shape in shapes:
+        shape_type = shape['shape_type']
+
+    return img, annos
+
+
+if __name__ == "__main__":
+    img = labelme_decoder('D:/data/activeImg/picked/imgs/1_0.json')
+    from visiontoolkit.base import imshow
+    imshow(img)
