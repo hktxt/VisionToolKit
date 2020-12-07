@@ -2,7 +2,7 @@ import numpy as np
 import base64
 import io
 import PIL.Image
-from visiontoolkit.base import readJson
+from .base import readJson
 
 
 def padd2square(img, value=0):
